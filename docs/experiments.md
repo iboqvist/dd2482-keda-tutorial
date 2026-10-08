@@ -51,3 +51,57 @@ Worker replicas: 1
 
 Without an autoscaling mechanism, Kubernetes does not react to the
 amount of pending work in RabbitMQ.
+
+## Experiment 2: CPU-Based HorizontalPodAutoscaler
+
+### Goal
+
+Evaluate whether CPU utilization is an effective autoscaling signal
+for a queue-based worker workload.
+
+### Configuration
+
+The HorizontalPodAutoscaler targets the worker Deployment.
+
+- Minimum replicas: 1
+- Maximum replicas: 10
+- Target CPU utilization: 50%
+
+### Workload
+
+200 messages are published to RabbitMQ.
+
+Each worker processes approximately one message per second.
+
+### Expected Behavior
+
+The RabbitMQ queue grows significantly.
+
+However, the worker spends much of its processing time waiting rather
+than performing CPU-intensive computation.
+
+As a result, CPU utilization may remain below the HPA threshold even
+while many messages are waiting.
+
+### Observation
+
+Record the observed:
+
+- RabbitMQ queue length
+- Worker CPU utilization
+- Number of worker replicas
+
+### Explanation
+
+CPU utilization is an indirect measure of pending work.
+
+For queue-driven applications, a large backlog can exist without
+causing high CPU utilization.
+
+Therefore, CPU-based autoscaling may not respond appropriately to this
+type of workload.
+
+### Conclusion
+
+The experiment demonstrates why another scaling signal, such as
+RabbitMQ queue length, may better represent the actual workload.
