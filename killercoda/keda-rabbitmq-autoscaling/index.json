@@ -1,0 +1,38 @@
+{
+  "title": "Kubernetes Event-Driven Autoscaling with KEDA and RabbitMQ",
+  "description": "Compare fixed scaling, CPU-based HPA, and event-driven autoscaling with KEDA and RabbitMQ.",
+  "details": {
+    "intro": {
+      "text": "intro.md",
+      "background": "background.sh"
+    },
+    "steps": [
+      {
+        "title": "Deploy the Queue-Based Application",
+        "text": "step1/text.md"
+      },
+      {
+        "title": "Experiment 1: No Autoscaling",
+        "text": "step2/text.md"
+      },
+      {
+        "title": "Experiment 2: CPU-Based HPA",
+        "text": "step3/text.md"
+      },
+      {
+        "title": "Experiment 3: KEDA Autoscaling",
+        "text": "step4/text.md"
+      },
+      {
+        "title": "Compare the Results",
+        "text": "step5/text.md"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes-kubeadm-1node-4GB"
+  }
+}
