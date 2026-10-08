@@ -7,4 +7,4 @@ RUN pip install --no-cache-dir pika
 COPY producer.py .
 COPY worker.py .
 
-CMD ["python", "worker.py"]
+CMD ["python", "-u", "worker.py"]

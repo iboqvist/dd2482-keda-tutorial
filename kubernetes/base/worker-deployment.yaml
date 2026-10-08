@@ -18,7 +18,8 @@ spec:
     spec:
       containers:
         - name: worker
-          image: YOUR_WORKER_IMAGE
+          image: dd2482-keda-app:local
+          imagePullPolicy: Never
 
           env:
             - name: RABBITMQ_HOST
@@ -35,6 +36,9 @@ spec:
                 secretKeyRef:
                   name: rabbitmq-secret
                   key: password
+
+            - name: QUEUE_NAME
+              value: task_queue
 
             - name: PROCESSING_TIME
               value: "1"

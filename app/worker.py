@@ -36,15 +36,13 @@ channel.queue_declare(
 def callback(ch, method, properties, body):
     message = body.decode()
 
-    print(f"Processing {message}")
+    print(f"Processing {message}", flush=True)
 
     time.sleep(PROCESSING_TIME)
 
-    print(f"Finished {message}")
+    print(f"Finished {message}", flush=True)
 
-    ch.basic_ack(
-        delivery_tag=method.delivery_tag
-    )
+    ch.basic_ack(delivery_tag=method.delivery_tag)
 
 
 channel.basic_qos(prefetch_count=1)
