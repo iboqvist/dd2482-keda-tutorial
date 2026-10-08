@@ -105,3 +105,71 @@ type of workload.
 
 The experiment demonstrates why another scaling signal, such as
 RabbitMQ queue length, may better represent the actual workload.
+
+## Experiment 3: KEDA RabbitMQ Autoscaling
+
+### Goal
+
+Scale the worker Deployment based directly on the number of pending messages in RabbitMQ.
+Configuration
+KEDA was configured with:
+
+- RabbitMQ QueueLength trigger
+- Queue: task_queue
+- Target: 10 messages per worker
+- Minimum replicas: 0
+- Maximum replicas: 10
+- Polling interval: 5 seconds
+- Cooldown period: 30 seconds
+
+### Workload
+
+A large number of messages was published to RabbitMQ while the worker Deployment was scaled to zero.
+
+### Observation
+
+KEDA detected the RabbitMQ backlog and increased the number of worker replicas.
+During the experiment, the number of replicas increased approximately as follows:
+
+0 -> 1 -> 4 -> 8 -> 10
+
+As the queue was processed, KEDA reduced the number of replicas again.
+After the queue became empty and the cooldown period passed, the Deployment scaled back to zero.
+Example behavior:
+
+```text
+
+Queue receives messages
+        |
+        v
+KEDA detects queue length
+        |
+        v
+0 -> multiple workers
+        |
+        v
+Queue is processed in parallel
+        |
+        v
+Queue becomes empty
+        |
+        v
+Workers -> 0
+
+```
+
+### Conclusion
+
+KEDA responds directly to the actual amount of pending work.
+For this queue-based workload, RabbitMQ queue length is a more appropriate scaling signal than CPU utilization.
+
+| Approach | Scaling Signal | Observed Behavior |
+|---|---|---|
+| No autoscaling | None | Always 1 worker |
+| CPU-based HPA | CPU utilization | CPU stayed around 1%, so the worker did not scale |
+| KEDA | RabbitMQ queue length | Workers scaled up with the backlog and returned to 0 when the queue was empty |
+
+## Final Observation
+
+The experiments show that the effectiveness of autoscaling depends strongly on choosing a metric that represents the actual workload.
+For this application, CPU utilization does not represent the amount of pending work well, while RabbitMQ queue length directly reflects the number of jobs waiting to be processed.
