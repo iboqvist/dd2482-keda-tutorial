@@ -1,9 +1,9 @@
 [project]
 name = "dd2482-keda-tutorial"
 version = "0.1.0"
-description = "Add your description here"
+description = "Executable tutorial demonstrating Kubernetes autoscaling with RabbitMQ, HPA and KEDA"
 readme = "README.md"
-requires-python = ">=3.15"
+requires-python = ">=3.12"
 dependencies = [
     "pika>=1.4.4",
 ]
