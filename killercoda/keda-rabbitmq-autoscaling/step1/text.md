@@ -6,7 +6,7 @@ RabbitMQ will store pending jobs in the `task_queue`, while the worker will cons
 
 ## 1. Move into the project directory
 
-`cd /root/dd2482-keda-tutorial`{{exec}}
+`cd dd2482-keda-tutorial`{{exec}}
 
 ## 2. Deploy RabbitMQ
 
