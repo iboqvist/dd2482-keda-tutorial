@@ -12,6 +12,8 @@ RabbitMQ will store pending jobs in the `task_queue`, while the worker will cons
 
 ## 2. Deploy RabbitMQ
 
+We'll start by applying our RabbitMQ configuration files to set everything up. The contents of the configuration files will not be listed, as some are rather long, but you are encouraged to read them (or at least skim them over!) to get an understanding of what's going on.
+
 Create the RabbitMQ credentials:
 
 `kubectl apply -f kubernetes/base/rabbitmq-secret.yaml`{{exec}}
