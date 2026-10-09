@@ -18,8 +18,8 @@ spec:
     spec:
       containers:
         - name: worker
-          image: dd2482-keda-app:local
-          imagePullPolicy: Never
+          image: ghcr.io/iboqvist/dd2482-keda-app:latest
+          imagePullPolicy: Always
 
           env:
             - name: RABBITMQ_HOST
