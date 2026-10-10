@@ -50,7 +50,7 @@ Inspect the running pods:
 
 `kubectl get pods`{{exec}}
 
-You should see both RabbitMQ and the worker running:
+You should see both RabbitMQ and the worker running. Each pod represents one or more containers running in a shared context. In this case, there's only one container per pod.
 
 ```text
 rabbitmq-...   1/1   Running
@@ -60,6 +60,8 @@ worker-...     1/1   Running
 Inspect the RabbitMQ Service:
 
 `kubectl get svc rabbitmq`{{exec}}
+
+You should see the corresponding Service running. This service provides a way to address pods with a stable identifier, even as the number of pods scale up and down with the Deployment.
 
 Finally, check the worker logs:
 
