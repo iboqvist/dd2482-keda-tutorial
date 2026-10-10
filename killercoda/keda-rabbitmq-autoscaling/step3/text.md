@@ -3,7 +3,7 @@
 Kubernetes HorizontalPodAutoscaler (HPA) can automatically change the
 number of replicas depending on resource utilization. This autoscaling is implemented as a control loop. Metrics are read, compared against a target, and the replica count is scaled accordingly. 
 
-By default, HPA provides two metrics: CPU utilization and memory utilization. In this experiment, we will use CPU utilization.
+By default, Kubernetes provides two metrics: CPU utilization and memory utilization. In this experiment, we will use CPU utilization.
 
 Before starting, reset the queue from the previous experiment:
 
