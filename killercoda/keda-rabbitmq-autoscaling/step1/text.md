@@ -12,17 +12,17 @@ RabbitMQ will store pending jobs in the `task_queue`, while the worker will cons
 
 ## 2. Deploy RabbitMQ
 
-We'll start by applying our RabbitMQ configuration files to set everything up. The contents of the configuration files will not be listed, as some are rather long, but you are encouraged to read them (or at least skim them over!) to get an understanding of what's going on.
+We'll start by applying the RabbitMQ configuration files. This will configure a minimal RabbitMQ service. The contents of the configuration files will not be described as to keep this tutorial focused on KEDA, but you are encouraged to read them (or at least skim them over!) to get a better understanding of what's going on.
 
-Create the RabbitMQ credentials:
+Create a Kubernetes secret with placeholder RabbitMQ credentials:
 
 `kubectl apply -f kubernetes/base/rabbitmq-secret.yaml`{{exec}}
 
-Deploy RabbitMQ:
+Create a scaleable Deployment object for RabbitMQ using the credentials from the previous step:
 
 `kubectl apply -f kubernetes/base/rabbitmq-deployment.yaml`{{exec}}
 
-Create the RabbitMQ Service:
+Expose the RabbitMQ Deployment on port 5672:
 
 `kubectl apply -f kubernetes/base/rabbitmq-service.yaml`{{exec}}
 
