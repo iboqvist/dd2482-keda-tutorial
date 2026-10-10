@@ -22,7 +22,7 @@ Create a scaleable Deployment object for RabbitMQ using the credentials from the
 
 `kubectl apply -f kubernetes/base/rabbitmq-deployment.yaml`{{exec}}
 
-Expose the RabbitMQ Deployment on port 5672:
+Make RabbitMQ deployment internally reachable on port 5672:
 
 `kubectl apply -f kubernetes/base/rabbitmq-service.yaml`{{exec}}
 
