@@ -15,7 +15,9 @@ There should be exactly one worker replica.
 
 ## 2. Generate workload
 
-The following step creates a new pod running a RabbitMQ producer. The newly created producer is then called upon to generate 100 messages. A queue named `task_queue` is declared, which the newly published messages are routed to through the default exchange. 
+The following step creates a new pod running a RabbitMQ producer. The newly created producer is then called upon to generate 100 messages. 
+
+A queue named `task_queue` is declared, which the newly published messages are routed to through the default exchange. 
 
 `bash scripts/generate-load.sh 100`{{exec}}
 
@@ -27,7 +29,9 @@ Check how many messages are waiting:
 
 `kubectl exec deployment/rabbitmq -- rabbitmqctl list_queues name messages_ready messages_unacknowledged`{{exec}}
 
-There should be two columns: `messages_ready` and `messages_unacknowledged`. The former represents messages waiting in the queue, while the latter represents messages currently being processed. You should expect to see a little under 100 messages under `messages_ready` in`task_queue`, depending on how long it's been since you ran the last step. As we only have one worker, `messages_unacknowledged` will stay constant at 1 while messages are being processed.
+There should be two columns: `messages_ready` and `messages_unacknowledged`. The former represents messages waiting in the queue, while the latter represents messages currently being processed. 
+
+You should expect to see a little under 100 messages under `messages_ready` in `task_queue`, depending on how long it's been since you ran the last step. As we only have one worker, `messages_unacknowledged` will stay constant at 1 while messages are being processed.
 
 ## 4. Inspect the workers
 

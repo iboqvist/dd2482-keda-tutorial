@@ -1,6 +1,10 @@
 # Deploy the Queue-Based Application
 
-RabbitMQ is an open-source message broker that helps receive, route, and send messages. A message is a package of data that represents something: perhaps an event, a task, or an email. Incoming messages pass through an exchange, which then passes each message on to a queue, where it's eventually passed on to a consumer. For the purposes of this tutorial, having a deep understanding of RabbitMQ is not necessary. It might help to think of it as a more powerful version of Redis.
+RabbitMQ is an open-source message broker that helps receive, route, and send messages. A message is a package of data that represents something: perhaps an event, a task, or an email. 
+
+Incoming messages pass through an exchange, which then passes each message on to a queue, where it's eventually passed on to a consumer. 
+
+For the purposes of this tutorial, having a deep understanding of RabbitMQ is not necessary. It might help to think of it as a more powerful version of Redis.
 
 In this step, we will deploy RabbitMQ and a single worker inside Kubernetes.
 
@@ -12,7 +16,9 @@ RabbitMQ will store pending jobs in the `task_queue`, while the worker will cons
 
 ## 2. Deploy RabbitMQ
 
-We'll start by applying the RabbitMQ configuration files. This will configure a minimal RabbitMQ service. The contents of the configuration files will not be described as to keep this tutorial focused on KEDA, but you are encouraged to read them (or at least skim them over!) to get a better understanding of what's going on.
+We'll start by applying the RabbitMQ configuration files. This will configure a minimal RabbitMQ service. 
+
+The contents of the configuration files will not be described as to keep this tutorial focused on KEDA, but you are encouraged to read them (or at least skim them over!) to get a better understanding of what's going on.
 
 Create a Kubernetes secret with placeholder RabbitMQ credentials:
 
@@ -34,7 +40,9 @@ Wait until RabbitMQ is ready:
 
 Now that we have RabbitMQ set up, let's deploy a worker. 
 
-A worker pulls one message at a time from RabbitMQ's queue and processes it. In this example, the "processing" is just a one-second sleep to represent work being done. After it's processed, an acknowledgement is sent back to the queue, signifying that another message can be sent. The worker(s) use the credentials defined earlier in the tutorial to interface with the queue.
+A worker pulls one message at a time from RabbitMQ's queue and processes it. In this example, the "processing" is just a one-second sleep to represent work being done. After it's processed, an acknowledgement is sent back to the queue, signifying that another message can be sent. 
+
+The worker(s) use the credentials defined earlier in the tutorial to interface with the queue.
 
 Deploy one worker:
 
