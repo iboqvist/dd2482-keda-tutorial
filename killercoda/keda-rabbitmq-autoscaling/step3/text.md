@@ -32,11 +32,11 @@ Wait for metrics to become available:
 
 ## 2. Enable CPU-based autoscaling
 
-Apply the HPA:
+We have defined a configuration file to connect the CPU metrics from Metrics Server into HPA. Apply the configuration:
 
 `kubectl apply -f kubernetes/hpa/worker-hpa.yaml`{{exec}}
 
-Inspect it:
+Inspect the HPA instance:
 
 `kubectl get hpa`{{exec}}
 
@@ -48,11 +48,11 @@ The HPA is configured with:
 
 ## 3. Generate a larger workload
 
-Publish 200 messages:
+Now that we've configured HPA to scale on CPU utilization, let's generate a larger workload compared to the previous step and see what happens. Start with 200 messages:
 
 `bash scripts/generate-load.sh 200`{{exec}}
 
-Wait a few seconds and inspect the CPU utilization:
+Now wait a few seconds and inspect the CPU utilization:
 
 `sleep 15 && kubectl top pods`{{exec}}
 
