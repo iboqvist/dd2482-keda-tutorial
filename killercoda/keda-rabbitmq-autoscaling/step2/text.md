@@ -1,11 +1,11 @@
 # Experiment 1: No Autoscaling
 
 In the first experiment, we will observe how the application behaves
-without any autoscaling mechanism.
+without any autoscaling mechanism. This will then be used as a benchmark to compare the autoscaling options against.
 
 The worker Deployment is configured with exactly one replica.
 
-## 1. Verify the worker count
+## 1. Set and verify the worker count
 
 `kubectl scale deployment worker --replicas=1`{{exec}}
 
@@ -15,17 +15,19 @@ There should be exactly one worker replica.
 
 ## 2. Generate workload
 
-Publish 100 messages to RabbitMQ:
+The following step creates a new pod running a RabbitMQ producer. The newly created producer is then called upon to generate 100 messages. A queue named `task_queue` is declared, which the newly published messages are routed to through the default exchange. 
 
 `bash scripts/generate-load.sh 100`{{exec}}
 
 ## 3. Inspect the RabbitMQ queue
 
+Recall from the previous step that each message takes a worker one second to process. As soon as the 100 messages are routed to the queue, the sole worker starts processing messages.
+
 Check how many messages are waiting:
 
 `kubectl exec deployment/rabbitmq -- rabbitmqctl list_queues name messages_ready messages_unacknowledged`{{exec}}
 
-You should see messages waiting in `task_queue`.
+There should be two columns: `messages_ready` and `messages_unacknowledged`. The former represents messages waiting in the queue, while the latter represents messages currently being processed. You should expect to see a little under 100 messages under `messages_ready` in`task_queue`, depending on how long it's been since you ran the last step. As we only have one worker, `messages_unacknowledged` will stay constant at 1 while messages are being processed.
 
 ## 4. Inspect the workers
 
