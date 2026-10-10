@@ -32,6 +32,10 @@ Wait until RabbitMQ is ready:
 
 ## 3. Deploy the worker
 
+Now that we have RabbitMQ set up, let's deploy a worker. 
+
+A worker pulls one message at a time from RabbitMQ's queue and processes it. In this example, the "processing" is just a one-second sleep to represent work being done. After it's processed, an acknowledgement is sent back to the queue, signifying that another message can be sent. The worker(s) use the credentials defined earlier in the tutorial to interface with the queue.
+
 Deploy one worker:
 
 `kubectl apply -f kubernetes/base/worker-deployment.yaml`{{exec}}
