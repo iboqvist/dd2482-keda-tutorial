@@ -17,8 +17,7 @@ For HPA to scale on CPU usage metrics, we need to pull down and apply the latest
 
 `kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml`{{exec}}
 
-Allow the Metrics Server to connect
-to the kubelet using its local certificate:
+Allow the Metrics Server to connect to the kubelet without verifying certificates:
 
 `kubectl patch deployment metrics-server -n kube-system --type='json' -p='[{"op":"add","path":"/spec/template/spec/containers/0/args/-","value":"--kubelet-insecure-tls"}]'`{{exec}}
 
