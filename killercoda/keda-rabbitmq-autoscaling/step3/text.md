@@ -13,11 +13,11 @@ Before starting, reset the queue from the previous experiment:
 
 ## 1. Install Metrics Server
 
-HPA needs CPU metrics from Kubernetes.
+For HPA to scale on CPU usage metrics, we need to pull down and apply the latest Metrics Server image:
 
 `kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml`{{exec}}
 
-For this local Kubernetes environment, allow Metrics Server to connect
+Allow the Metrics Server to connect
 to the kubelet using its local certificate:
 
 `kubectl patch deployment metrics-server -n kube-system --type='json' -p='[{"op":"add","path":"/spec/template/spec/containers/0/args/-","value":"--kubelet-insecure-tls"}]'`{{exec}}
@@ -28,7 +28,7 @@ Wait until Metrics Server is ready:
 
 Wait for metrics to become available:
 
-`sleep 20 && kubectl top pods`{{exec}}
+`sleep 15 && kubectl top pods`{{exec}}
 
 ## 2. Enable CPU-based autoscaling
 
