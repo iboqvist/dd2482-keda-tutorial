@@ -1,6 +1,6 @@
 # Deploy the Queue-Based Application
 
-RabbitMQ is an open-source message broker that helps receive, route, and send messages. A message is a package of data that represents something: perhaps an event, a task, or an email. Incoming messages pass through an exchange, which then passes each on to a queue where it's eventually passed on to a consumer. For the purposes of this tutorial, having a deep understanding of RabbitMQ is not necessary. It might help to think of it as a more powerful version of Redis.
+RabbitMQ is an open-source message broker that helps receive, route, and send messages. A message is a package of data that represents something: perhaps an event, a task, or an email. Incoming messages pass through an exchange, which then passes each message on to a queue, where it's eventually passed on to a consumer. For the purposes of this tutorial, having a deep understanding of RabbitMQ is not necessary. It might help to think of it as a more powerful version of Redis.
 
 In this step, we will deploy RabbitMQ and a single worker inside Kubernetes.
 
