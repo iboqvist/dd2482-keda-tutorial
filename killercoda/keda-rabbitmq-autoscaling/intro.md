@@ -4,7 +4,7 @@
 
 One of the major benefits of Kubernetes compared to Docker and similar container orchestration tools is the support for scaling deployments to meet demand. 
 
-Unlike Docker, where the only (built-in) lever you have is vertical scaling (or increasing container resources), Kubernetes supports horizontal scaling (or increasing the number of containers). This is often a really useful tool for ensuring that capacity scales with demand. 
+Unlike Docker, where your only automatic option is vertical scaling (or increasing container resources), Kubernetes supports automatic horizontal scaling (or increasing the number of containers). This is often a really useful tool for ensuring that capacity scales with demand. 
 
 In Kubernetes, horizontal scaling is achieved through an object called a HorizontalPodAutoscaler (HPA). By default, this scaler supports CPU and memory usage metrics. However, not all tasks scale with CPU or memory usage. 
 
