@@ -35,14 +35,14 @@ You will compare three approaches:
 ```text
 Producer
    |
+   | messages
    v
-RabbitMQ ---|
-   |        |
-   v        v
-Workers  Metrics
-   ^        |
-   |        |
-  KEDA <-----
+RabbitMQ <----------+
+   |                |
+   | messages       | polls queue length
+   v                |
+Workers <--------- KEDA
+         scales
 
 ```
 

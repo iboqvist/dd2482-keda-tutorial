@@ -32,14 +32,14 @@ The application consists of:
 ```text
 Producer
    |
+   | messages
    v
-RabbitMQ
-   |
-   v
-Workers
-   ^
-   |
-  KEDA
+RabbitMQ <----------+
+   |                |
+   | messages       | polls queue length
+   v                |
+Workers <--------- KEDA
+         scales
 
 ```
 
