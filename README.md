@@ -11,6 +11,14 @@ The tutorial compares three approaches:
 2. CPU-based Kubernetes HorizontalPodAutoscaler
 3. Event-driven autoscaling with KEDA and RabbitMQ
 
+## Usage
+
+The tutorial can be accessed at the link below:
+
+https://killercoda.com/iboqvist/course/killercoda/keda-rabbitmq-autoscaling
+
+To run the tutorial in Killercoda, you will need to sign up or sign in. This is entirely free. You can choose between signing up with email or authenticating with an OICD provider such as Github, Google, or GitLab.
+
 ## Architecture 
 
 The application consists of:
